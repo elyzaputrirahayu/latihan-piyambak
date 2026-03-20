@@ -1,0 +1,22 @@
+body {
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.love_word {
+    color: #ea80b0;
+    font-size: 1.4rem;
+    transform: rorate(_30deg);
+    text-shadow: 0 0 10px #fff;
+    letter-spacing: 2px;
+
+    animation: move 1s infinite alternate ease-in-out;
+}
+
+@keyframes move {
+    from {transform: translateX(-100px) rotate(-20deg);}
+    to {transform: translateX(100px) rotate(220deg);}
+}

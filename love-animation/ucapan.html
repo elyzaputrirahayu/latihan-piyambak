@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Special For You 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: linear-gradient(to top, #ff9a9e, #fad0c4);
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+
+    h1 {
+        color: white;
+        margin-top: 200px;
+        animation: naikTurun 3s infinite;
+    }
+
+    p {
+        color: white;
+        font-size: 20px;
+    }
+
+    /* animasi teks */
+    @keyframes naikTurun {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0); }
+    }
+
+    /* hati jatuh */
+    .heart {
+        position: absolute;
+        top: -10px;
+        color: plum;
+        font-size: 20px;
+        animation: jatuh linear infinite;
+    }
+
+    @keyframes jatuh {
+        0% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<h1>💖 MAWAR BERDURI TUMBUH DIATAS GENTENG SELAMAT HARI RAYA IDUL FITRI MAS GANTENG 💖</h1>
+<p>MOHON MAAF LAHIR DAN BATIN, MAAF YA ATAS SEMUA KESALAHANKU,  ✨</p>
+
+<script>
+    function buatHati() {
+        const hati = document.createElement("div");
+        hati.classList.add("heart");
+        hati.innerHTML = "💖";
+
+        hati.style.left = Math.random() * 100 + "vw";
+        hati.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+        document.body.appendChild(hati);
+
+        setTimeout(() => {
+            hati.remove();
+        }, 5000);
+    }
+
+    setInterval(buatHati, 300);
+</script>
+
+</body>
+</html>
