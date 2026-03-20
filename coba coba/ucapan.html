@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 🌌💖</title>
+
+<script src="script.js"></script>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+    background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* BULAN */
+.moon {
+    position: absolute;
+    top: 60px;
+    right: 100px;
+    width: 90px;
+    height: 90px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 40px white;
+}
+
+/* BINTANG */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    animation: twinkle 2s infinite;
+}
+@keyframes twinkle {
+    0%,100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+/* SHOOTING STAR */
+.shooting {
+    position: absolute;
+    width: 2px;
+    height: 120px;
+    background: linear-gradient(white, transparent);
+    transform: rotate(45deg);
+    animation: shoot 1s linear;
+}
+@keyframes shoot {
+    0% { transform: translate(0,0) rotate(45deg); opacity:1;}
+    100% { transform: translate(600px,600px) rotate(45deg); opacity:0;}
+}
+
+/* KUCING */
+.cat {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 100px;
+    cursor: pointer;
+    z-index: 3;
+    animation: bounce 2s infinite;
+}
+@keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0);}
+    50% { transform: translateX(-50%) translateY(-20px);}
+}
+
+/* TEKS */
+.title {
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+/* CARD */
+.card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(20px);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 320px;
+    color: white;
+    opacity: 0;
+    transition: 0.5s;
+    z-index: 4;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.card.show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    
+}
+
+button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+/* SPARKLE */
+.sparkle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    animation: sparkle 1s forwards;
+}
+@keyframes sparkle {
+    to {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+}
+
+/* FIREWORK */
+.firework {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: pink;
+    border-radius: 50%;
+    animation: explode 1s ease-out forwards;
+}
+@keyframes explode {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: translate(var(--x), var(--y)) scale(0.5); opacity: 0; }
+}
+
+.profile {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid white;
+    box-shadow: 0 0 10px rgba(255,255,255,0.4);
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="moon"></div>
+
+<div class="title">
+    <h1>🌌 Klik Kucingnya 🌌</h1>
+</div>
+
+<div class="cat" onclick="start(event)">🐱</div>
+
+<div class="card" id="card">
+    <img src="WhatsApp Image 2026-03-20 at 14.27.57.jpeg" class="profile">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Playfair+Display&display=swap" rel="stylesheet">
+    <h2>⭐ Buah Kelengkeng Jatuh DiGenteng, Hay Ganteng selamat hari raya idul fitri 2026⭐</h2>
+    <p>
+        Semangat ya mas sayang, maaf in semua kesalahanku ya 
+        Sekarang ada aku, klo butuh apa-apa bisa chat aku 🌙✨
+    </p>
+    <button onclick="closeCard()">Tutup</button>
+</div>
+
+<audio id="music" src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3"></audio>
+
+<script>
+// bintang kecil
+for(let i=0;i<150;i++){
+    let s=document.createElement("div");
+    s.className="star";
+    s.style.left=Math.random()*100+"vw";
+    s.style.top=Math.random()*100+"vh";
+    document.body.appendChild(s);
+}
+
+// shooting star
+setInterval(()=>{
+    let st=document.createElement("div");
+    st.className="shooting";
+    st.style.left=Math.random()*window.innerWidth+"px";
+    st.style.top=Math.random()*window.innerHeight+"px";
+    document.body.appendChild(st);
+    setTimeout(()=>st.remove(),1000);
+},800);
+
+let started=false;
+
+function start(e){
+    if(!started){
+        document.getElementById("card").classList.add("show");
+        document.getElementById("music").play();
+        started=true;
+
+        // FIREWORK tengah
+        fireworkEffect(window.innerWidth/2, window.innerHeight/2);
+    }
+
+    // sparkle klik
+    for(let i=0;i<10;i++){
+        let sp=document.createElement("div");
+        sp.className="sparkle";
+        sp.style.left=e.clientX+"px";
+        sp.style.top=e.clientY+"px";
+        document.body.appendChild(sp);
+        setTimeout(()=>sp.remove(),1000);
+    }
+}
+
+function fireworkEffect(x, y){
+    for(let i=0;i<30;i++){
+        let f=document.createElement("div");
+        f.className="firework";
+
+        let angle=Math.random()*2*Math.PI;
+        let radius=Math.random()*900;
+
+        f.style.left=x+"px";
+        f.style.top=y+"px";
+        f.style.setProperty('--x', Math.cos(angle)*radius+"px");
+        f.style.setProperty('--y', Math.sin(angle)*radius+"px");
+
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(),1000);
+    }
+}
+
+function closeCard(){
+    document.getElementById("card").classList.remove("show");
+}
+</script>
+
+</body>
+</html>
